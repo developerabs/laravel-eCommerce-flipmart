@@ -51,4 +51,14 @@ class BrandController extends Controller
     		return 0;
     	}
     }
+    public function deleteBrand(Request $request)
+    {
+    	$id = $request->input('id');
+    	$result = BrandModel::where('id', '=', $id)->delete();
+    	 if ($result == true) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
