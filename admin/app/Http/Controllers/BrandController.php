@@ -36,4 +36,19 @@ class BrandController extends Controller
     	 $result = json_decode(BrandModel::orderBy('id','desc')->get());
         return $result;
     }
+    public function brandActiveInactive(Request $request)
+    {
+    	$id = $request->input('id');
+    	$row = BrandModel::where('id', '=', $id)->first();
+    	$statusdata = $row->status;
+    	if ($statusdata == 1) {
+    		BrandModel::where('id', '=', $id)->update(['status'=>'0']);
+    		return 1;
+    	}else if ($statusdata == 0) {
+    		BrandModel::where('id', '=', $id)->update(['status'=>'1']);
+    		return 1;
+    	}else{
+    		return 0;
+    	}
+    }
 }

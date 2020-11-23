@@ -21,3 +21,4 @@ Route::get('/addBrand',[BrandController::class,'brandIndex']);
 Route::post('/addBrand',[BrandController::class,'addBrand']);
 Route::get('/allBrand',[BrandController::class,'allBrandIndex']);
 Route::get('/getAllBrand',[BrandController::class,'getAllBrand']);
+Route::post('/brandActiveInactive',[BrandController::class,'brandActiveInactive']);

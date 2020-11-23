@@ -45,6 +45,7 @@ getBrandTableData();
       .then(function(response) {
         if (response.status == 200) {
             $('#basic-table').DataTable().destroy();
+            $('#brand_table').empty();
           var jasonData = response.data;
           let a = 1;
           $.each(jasonData, function(i, item) {
@@ -54,17 +55,45 @@ getBrandTableData();
                 "<td>" + jasonData[i].brand_name + "</td>" +
                 "<td>" + jasonData[i].brand_slug + "</td>" +
                 "<td>" + statusdata + "</td>" +
-                "<td><a class='btn btn-primary btn-xs' data-id=" + jasonData[i].id + " ><i class='fa fa-arrow-up'></i></a><a class='btn btn-warning btn-xs' data-id=" + jasonData[i].id + " ><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-xs' data-id=" + jasonData[i].id + " ><i class='fa fa-trash-o'></i></a></td>"
+                "<td><a class='btn btn-primary btn-xs activeInactiveBtn' data-id=" + jasonData[i].id + " ><i class='fa fa-arrow-up'></i></a><a class='btn btn-warning btn-xs' data-id=" + jasonData[i].id + " ><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-xs' data-id=" + jasonData[i].id + " ><i class='fa fa-trash-o'></i></a></td>"
                 
             ).appendTo('#brand_table');
           a++;
           });
+          $('.activeInactiveBtn').click(function() {
+             var id = $(this).data('id');
+             brandActiveInactive(id);
+          })
           $('#basic-table').DataTable({"order":false});
+          $('.dataTables_length').addClass('bs-select');
 
         } else {
           toastr.error('Somthing want wrong.');
         }
 
+      })
+      .catch(function(error) {
+        toastr.error('Somthing want wrong.');
+      });
+  } 
+
+    //service confirm delete
+
+
+  function brandActiveInactive(brandId) {
+    axios.post('/brandActiveInactive', {
+        id: brandId
+      })
+      .then(function(response) {
+        if (response.status == 200) {
+          if (response.data == 1) {
+            $('#deleteModal').modal('hide');
+            toastr.success('Brand Status is Changed');
+            getBrandTableData();
+          } else {
+            toastr.error('Delete Fail.');
+          }
+        }
       })
       .catch(function(error) {
         toastr.error('Somthing want wrong.');
