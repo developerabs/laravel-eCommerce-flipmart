@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Home');
 });
+Route::get('/addBrand',[BrandController::class,'brandIndex']);
+Route::post('/addBrand',[BrandController::class,'addBrand']);
+Route::get('/allBrand',[BrandController::class,'allBrandIndex']);
+Route::get('/getAllBrand',[BrandController::class,'getAllBrand']);
