@@ -30,18 +30,16 @@
 	 // catch add new service data 
   $('#brandAddbtn').click(function() {
     var brandName = $('#brandName').val();
-    var brandSlug = $('#brandName').val();
 
-    brandAddNewData(brandName, brandSlug);
+    brandAddNewData(brandName);
   })
 
-  function brandAddNewData(brandName, brandSlug) {
+  function brandAddNewData(brandName) {
     if (brandName.length == 0) {
       toastr.error('Add Brand Name');
     } else {
-      axios.post('/addBrand',{
-          name: brandName,
-          slug: brandSlug,
+      axios.post('/brand/addBrand',{
+          name: brandName
         })
         .then(function(response) {
           if (response.status == 200) {

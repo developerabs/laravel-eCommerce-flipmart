@@ -5471,5 +5471,20 @@ html.left-sidebar-top .c-hamburger span {
 .pagination > li > span:focus {
   color: #126f5c;
 }
-
+/*# data table style */
+.activeInactiveBtn{
+  margin-right: 6px;
+}
+.editBrandBtn{
+  margin-right: 6px;
+}
+#brandEditId{
+  display: none;
+}
+#modal_body{
+  padding: 20px;
+}
+.sub-cat{
+  margin-top: 10px;
+}
 /*# sourceMappingURL=style.css.map */
